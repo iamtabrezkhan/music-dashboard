@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import classes from "./Main.module.css";
 import PageLoader from "../PageLoader";
 import { getMusicData } from "../../http";
+import FilterHeader from "../FilterHeader";
+import MusicList from "../MusicList";
 
 const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +29,14 @@ const Main = () => {
     return <PageLoader />;
   }
 
-  return <div className={classes.main}></div>;
+  return (
+    <div className={classes.container}>
+      <div className={classes.innerContainer}>
+        <FilterHeader />
+        <MusicList />
+      </div>
+    </div>
+  );
 };
 
 export default Main;

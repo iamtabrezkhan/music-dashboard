@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchInput {
+  width: 100%;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 1.4rem;
+  border: 1px solid var(--borderDefault);
+}
+.searchInput:hover,
+.searchInput:focus {
+  border-color: var(--borderHover);
+}

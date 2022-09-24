@@ -1,5 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-size: 10px;
+  --borderDefault: #d4d4d4;
+  --borderHover: #b4b4b4;
+  --borderSubtle: #e9e9e9;
 }
 
 body {
