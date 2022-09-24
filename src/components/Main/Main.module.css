@@ -5,7 +5,8 @@
 
 .innerContainer {
   width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 12px 24px;
+  height: 100%;
+  padding: 12px 0px;
+  display: flex;
+  flex-direction: column;
 }

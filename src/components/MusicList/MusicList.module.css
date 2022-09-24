@@ -1,0 +1,13 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 16px;
+}
+
+.innerContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 1240px;
+  margin: 0 auto;
+}

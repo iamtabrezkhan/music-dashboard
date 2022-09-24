@@ -43,7 +43,7 @@ const Main = () => {
     <div className={classes.container}>
       <div className={classes.innerContainer}>
         <FilterHeader onSearch={onSearch} />
-        <MusicList />
+        <MusicList musicVideos={musicVideos} searchText={searchText} />
       </div>
     </div>
   );
