@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "./Main.module.css";
 import PageLoader from "../PageLoader";
 import { getMusicData } from "../../http";
@@ -8,6 +8,9 @@ import MusicList from "../MusicList";
 const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [genres, setGenres] = useState([]);
+  const [musicVideos, setMusicVideos] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     // fetch music data on mount
@@ -18,12 +21,19 @@ const Main = () => {
     try {
       const res = await getMusicData();
       const data = res.data || {};
+      const { genres = [], videos = [] } = data;
+      setGenres(genres);
+      setMusicVideos(videos);
     } catch (error) {
       setError("Oops! Something went wrong!");
     } finally {
       setIsLoading(false);
     }
   };
+
+  const onSearch = useCallback((value) => {
+    setSearchText(value);
+  }, []);
 
   if (isLoading) {
     return <PageLoader />;
@@ -32,7 +42,7 @@ const Main = () => {
   return (
     <div className={classes.container}>
       <div className={classes.innerContainer}>
-        <FilterHeader />
+        <FilterHeader onSearch={onSearch} />
         <MusicList />
       </div>
     </div>
