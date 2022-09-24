@@ -1,19 +1,26 @@
 .container {
+  opacity: 0;
+  transition: transform ease-in-out 0.2s, opacity 0.1s linear;
   border: 1px solid var(--borderDefault);
-  transition: transform ease-in-out 0.2s;
 }
 
 .container:hover {
   transform: translateY(-3px);
 }
 
+.containerVisible {
+  opacity: 1;
+}
+
 .innerContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   animation: opacityAnimation 0.2s;
 }
 
 .innerContainer img {
-  max-width: 100%;
+  width: 100%;
 }
 
 .bottomContainer {
@@ -21,7 +28,7 @@
   flex-direction: column;
   row-gap: 4px;
   text-align: center;
-  padding: 4px 8px;
+  padding: 12px 8px;
 }
 
 .artist {

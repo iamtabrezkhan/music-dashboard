@@ -34,17 +34,20 @@ const MusicItem = (props) => {
     }
   };
 
+  let containerClass = classes.container;
+  if (isVisible) {
+    containerClass += " " + classes.containerVisible;
+  }
+
   return (
-    <div ref={containerRef} className={classes.container}>
-      {isVisible && (
-        <div className={classes.innerContainer}>
-          <img src={item.image_url} alt={item.title} />
-          <div className={classes.bottomContainer}>
-            <div className={classes.artist}>{item.artist}</div>
-            <div className={classes.titleContainer}>{item.title}</div>
-          </div>
+    <div ref={containerRef} className={containerClass}>
+      <div className={classes.innerContainer}>
+        {isVisible ? <img src={item.image_url} alt={item.title} /> : null}
+        <div className={classes.bottomContainer}>
+          <div className={classes.artist}>{item.artist}</div>
+          <div className={classes.titleContainer}>{item.title}</div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
