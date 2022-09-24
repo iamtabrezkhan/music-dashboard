@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  text-align: center;
+}
+
+.illustration svg {
+  width: 300px;
+  height: 300px;
+}
+
+.errorText {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 1441px) {
+  .errorText {
+    font-size: 1.8rem;
+  }
+  .illustration svg {
+    width: 400px;
+    height: 400px;
+  }
+}

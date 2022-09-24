@@ -4,6 +4,7 @@ import PageLoader from "../PageLoader";
 import { getMusicData } from "../../http";
 import FilterHeader from "../FilterHeader";
 import MusicList from "../MusicList";
+import ErrorComponent from "../ErrorComponent";
 
 const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,10 +42,14 @@ const Main = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.innerContainer}>
-        <FilterHeader onSearch={onSearch} />
-        <MusicList musicVideos={musicVideos} searchText={searchText} />
-      </div>
+      {error ? (
+        <ErrorComponent error={error} />
+      ) : (
+        <div className={classes.innerContainer}>
+          <FilterHeader onSearch={onSearch} />
+          <MusicList musicVideos={musicVideos} searchText={searchText} />
+        </div>
+      )}
     </div>
   );
 };
