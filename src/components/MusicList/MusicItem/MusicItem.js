@@ -11,7 +11,7 @@ const MusicItem = (props) => {
     observer.current = new IntersectionObserver(onbserverCallback, {
       root: null,
       rootMargin: "0px",
-      threshold: 0.8,
+      threshold: 0.2,
     });
     const conRef = containerRef.current;
     if (conRef) {
