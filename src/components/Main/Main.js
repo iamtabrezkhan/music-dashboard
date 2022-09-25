@@ -7,19 +7,34 @@ import MusicList from "../MusicList";
 import ErrorComponent from "../ErrorComponent";
 
 const Main = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [genres, setGenres] = useState([]);
   const [musicVideos, setMusicVideos] = useState([]);
+  const [years, setYears] = useState([]);
   // ====
   const [searchText, setSearchText] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
   // =====
 
   useEffect(() => {
     // fetch music data on mount
     fetchMusicData();
   }, []);
+
+  const getUniqYearFromVideos = ({ videos }) => {
+    const hashMap = {};
+    const output = [];
+    for (const video of videos) {
+      const { release_year } = video;
+      if (!hashMap[release_year]) {
+        output.push(release_year);
+        hashMap[release_year] = true;
+      }
+    }
+    return output.sort();
+  };
 
   const fetchMusicData = async () => {
     try {
@@ -28,6 +43,7 @@ const Main = () => {
       const { genres = [], videos = [] } = data;
       setGenres(genres);
       setMusicVideos(videos);
+      setYears(getUniqYearFromVideos({ videos }));
     } catch (error) {
       setError("Oops! Something went wrong!");
     } finally {
@@ -43,10 +59,14 @@ const Main = () => {
     setSelectedGenres(value);
   };
 
+  const onSelectYear = (value) => {
+    setSelectedYear(value);
+  };
+
   if (isLoading) {
     return <PageLoader />;
   }
-
+  console.log(selectedYear);
   return (
     <div className={classes.container}>
       {error ? (
@@ -57,11 +77,14 @@ const Main = () => {
             genres={genres}
             onSelectGenres={onSelectGenres}
             onSearch={onSearch}
+            onSelectYear={onSelectYear}
+            years={years}
           />
           <MusicList
             musicVideos={musicVideos}
             searchText={searchText}
             selectedGenres={selectedGenres}
+            selectedYear={selectedYear}
           />
         </div>
       )}

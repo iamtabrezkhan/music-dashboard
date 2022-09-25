@@ -3,11 +3,11 @@ import classes from "./MusicList.module.css";
 import MusicItem from "./MusicItem";
 
 const MusicList = (props) => {
-  const { musicVideos, searchText, selectedGenres } = props;
+  const { musicVideos, searchText, selectedGenres, selectedYear } = props;
 
   const getMusicVideosList = () => {
     const trimmedSearchText = searchText.trim();
-    if (!trimmedSearchText && !selectedGenres?.length) {
+    if (!trimmedSearchText && !selectedGenres?.length && !selectedYear) {
       return musicVideos;
     }
     return musicVideos.filter((video) => {
@@ -18,6 +18,9 @@ const MusicList = (props) => {
       }
       if (selectedGenres?.length) {
         isMatch = isMatch && selectedGenres.includes(video.genre_id);
+      }
+      if (selectedYear) {
+        isMatch = isMatch && video.release_year == selectedYear;
       }
       return isMatch;
     });

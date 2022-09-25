@@ -3,7 +3,24 @@ import classes from "./FilterHeader.module.css";
 import debounce from "lodash.debounce";
 import Select from "react-select";
 
-const FilterHeader = ({ onSearch, genres, onSelectGenres }) => {
+const selectStyles = {
+  container: (styles) => ({
+    ...styles,
+    flex: 1,
+    fontSize: "1.6rem",
+  }),
+  control: (styles, state) => ({
+    ...styles,
+    borderColor: state.isFocused
+      ? "var(--borderHover) !important"
+      : "var(--borderDefault) !important",
+    boxShadow: "0px 0px 1px var(--borderDefault) !important",
+  }),
+};
+
+const FilterHeader = (props) => {
+  const { onSearch, genres, onSelectGenres, years, onSelectYear } = props;
+
   const debouncedOnSearch = useMemo(
     () =>
       debounce((e) => {
@@ -20,8 +37,20 @@ const FilterHeader = ({ onSearch, genres, onSelectGenres }) => {
     }));
   };
 
-  const onChangeMultiSelect = (values) => {
-    onSelectGenres(values.map(({ value }) => value));
+  const getYearOptions = () => {
+    return years.map((year) => ({
+      value: year,
+      label: year,
+    }));
+  };
+
+  const onChangeGenresSelect = (params) => {
+    onSelectGenres(params.map(({ value }) => value));
+  };
+
+  const onChangeYearSelect = (params) => {
+    const { value } = params || {};
+    onSelectYear(value);
   };
 
   return (
@@ -34,14 +63,16 @@ const FilterHeader = ({ onSearch, genres, onSelectGenres }) => {
       <div className={classes.dropdownContainer}>
         <Select
           options={getGenresOptions()}
-          onChange={onChangeMultiSelect}
+          onChange={onChangeGenresSelect}
           isMulti={true}
-          styles={{
-            container: (styles) => ({
-              ...styles,
-              fontSize: "1.6rem",
-            }),
-          }}
+          styles={selectStyles}
+          placeholder={"Select genres..."}
+        />
+        <Select
+          options={getYearOptions()}
+          onChange={onChangeYearSelect}
+          styles={selectStyles}
+          placeholder={"Select year..."}
         />
       </div>
     </div>
