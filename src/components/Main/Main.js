@@ -56,18 +56,18 @@ const Main = () => {
     setSearchText(value);
   }, []);
 
-  const onSelectGenres = (value) => {
+  const onSelectGenres = useCallback((value) => {
     setSelectedGenres(value);
-  };
+  }, []);
 
-  const onSelectYear = (value) => {
+  const onSelectYear = useCallback((value) => {
     setSelectedYear(value);
-  };
+  }, []);
 
   if (isLoading) {
     return <PageLoader />;
   }
-  console.log(selectedYear);
+
   return (
     <div className={classes.container}>
       {error ? (
