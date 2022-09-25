@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./MusicList.module.css";
 import MusicItem from "./MusicItem";
+import EmptyStateComponent from "../EmptyStateComponent";
+import SearchingIllustration from "../../svgcomponents/SearchingIllustration";
 
 const MusicList = (props) => {
   const { musicVideos, searchText, selectedGenres, selectedYear } = props;
@@ -30,11 +32,18 @@ const MusicList = (props) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.innerContainer}>
-        {updatedMusicVideoList.map((item) => {
-          return <MusicItem key={item.id} item={item} />;
-        })}
-      </div>
+      {updatedMusicVideoList?.length ? (
+        <div className={classes.innerContainer}>
+          {updatedMusicVideoList.map((item) => {
+            return <MusicItem key={item.id} item={item} />;
+          })}
+        </div>
+      ) : (
+        <EmptyStateComponent
+          illustration={<SearchingIllustration />}
+          text={"No results found! Try a different search or filter."}
+        />
+      )}
     </div>
   );
 };

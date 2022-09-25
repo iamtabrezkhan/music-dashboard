@@ -4,7 +4,8 @@ import PageLoader from "../PageLoader";
 import { getMusicData } from "../../http";
 import FilterHeader from "../FilterHeader";
 import MusicList from "../MusicList";
-import ErrorComponent from "../ErrorComponent";
+import EmptyStateComponent from "../EmptyStateComponent";
+import ErrorIllustration from "../../svgcomponents/ErrorIllustration";
 
 const Main = () => {
   const [genres, setGenres] = useState([]);
@@ -70,7 +71,10 @@ const Main = () => {
   return (
     <div className={classes.container}>
       {error ? (
-        <ErrorComponent error={error} />
+        <EmptyStateComponent
+          text={error}
+          illustration={<ErrorIllustration />}
+        />
       ) : (
         <div className={classes.innerContainer}>
           <FilterHeader
