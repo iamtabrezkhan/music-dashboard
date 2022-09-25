@@ -11,7 +11,10 @@ const Main = () => {
   const [error, setError] = useState(null);
   const [genres, setGenres] = useState([]);
   const [musicVideos, setMusicVideos] = useState([]);
+  // ====
   const [searchText, setSearchText] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  // =====
 
   useEffect(() => {
     // fetch music data on mount
@@ -36,6 +39,10 @@ const Main = () => {
     setSearchText(value);
   }, []);
 
+  const onSelectGenres = (value) => {
+    setSelectedGenres(value);
+  };
+
   if (isLoading) {
     return <PageLoader />;
   }
@@ -46,8 +53,16 @@ const Main = () => {
         <ErrorComponent error={error} />
       ) : (
         <div className={classes.innerContainer}>
-          <FilterHeader onSearch={onSearch} />
-          <MusicList musicVideos={musicVideos} searchText={searchText} />
+          <FilterHeader
+            genres={genres}
+            onSelectGenres={onSelectGenres}
+            onSearch={onSearch}
+          />
+          <MusicList
+            musicVideos={musicVideos}
+            searchText={searchText}
+            selectedGenres={selectedGenres}
+          />
         </div>
       )}
     </div>

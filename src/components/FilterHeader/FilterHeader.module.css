@@ -11,10 +11,14 @@
   width: 100%;
   outline: none;
   padding: 8px 12px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   border: 1px solid var(--borderDefault);
 }
 .searchInput:hover,
 .searchInput:focus {
   border-color: var(--borderHover);
+}
+
+.dropdownContainer {
+  margin-top: 8px;
 }
